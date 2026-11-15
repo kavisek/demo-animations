@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: demo-animations-frontend:dev
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      NODE_ENV: development
+      # File events from macOS bind mounts don't always reach the container,
+      # so poll for changes to keep hot reloading reliable.
+      WATCHPACK_POLLING: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+    volumes:
+      # Mount the source so edits on the host hot-reload in the container
+      - ./frontend_tailwind:/app
+      # Keep the container's node_modules and build cache instead of the host's
+      - /app/node_modules
+      - /app/.next
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:3000"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5

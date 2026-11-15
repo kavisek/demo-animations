@@ -1,0 +1,13 @@
+.git
+.claude
+.vscode
+**/node_modules
+**/.next
+**/out
+**/build
+**/coverage
+**/.env
+**/.env.*
+!**/.env.example
+**/.DS_Store
+**/npm-debug.log*

@@ -1,32 +1,31 @@
+# Production image: builds the Next.js app and serves it with `next start`.
 
-# pull official base image
-FROM node:14 AS builder
-
-# set working directory
+# --- Build stage ---------------------------------------------------------
+FROM node:22-alpine AS build
 WORKDIR /app
+ENV NEXT_TELEMETRY_DISABLED=1
 
+COPY frontend_tailwind/package.json frontend_tailwind/package-lock.json ./
+RUN --mount=type=cache,target=/root/.npm npm ci
 
-# install app dependencies
-#copies package.json and package-lock.json to Docker environment
-COPY ./frontend /frontend
-WORKDIR /frontend
+COPY frontend_tailwind/ ./
+RUN npm run build && npm prune --omit=dev
 
-# Installs all node packages
-RUN npm install 
+# --- Runtime stage -------------------------------------------------------
+FROM node:22-alpine
+WORKDIR /app
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    HOSTNAME=0.0.0.0 \
+    PORT=3000
 
-# Run build
-RUN npm run build
+COPY --from=build --chown=node:node /app/package.json ./
+COPY --from=build --chown=node:node /app/node_modules ./node_modules
+COPY --from=build --chown=node:node /app/.next ./.next
+COPY --from=build --chown=node:node /app/public ./public
 
-#Stage 2
-#######################################
-#pull the official nginx:1.19.0 base image
-FROM nginx:1.19.0
-#copies React to the container directory
-# Set working directory to nginx resources directory
-WORKDIR /usr/share/nginx/html
-# Remove default nginx static resources
-RUN rm -rf ./*
-# Copies static resources from builder stage
-COPY --from=builder /frontend/build .
-# Containers run nginx with global directives and daemon off
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+USER node
+EXPOSE 3000
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget -q --spider http://127.0.0.1:3000 || exit 1
+CMD ["npm", "start"]
