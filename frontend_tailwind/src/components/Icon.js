@@ -30,7 +30,33 @@ const paths = {
   rows: "M4 6h16M4 12h16M4 18h9m5-3v6m-3-3h6",
   expand: "M4 6h16M4 10h16M8 14h12M8 18h12",
   loader: "M4 6h16M4 12h10M4 18h13",
-  check: "m5 12 5 5 9-10",
+  phone: "M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm3 17h2",
+  island: "M7 9h10a3 3 0 0 1 0 6H7a3 3 0 0 1 0-6Z",
+  sheet: "M4 4h16v16H4zM4 12h16m-10 2h4",
+  swipe: "M4 8h11M4 12h8M4 16h11m2-7 3 3-3 3",
+  stack: "M8 4h12v14H8zM4 8v12h12",
+  apps: "M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z",
+  toggle: "M7 7h10a5 5 0 0 1 0 10H7A5 5 0 0 1 7 7Zm10 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z",
+  alert: "M5 5h14v10H9l-4 4V5Zm7 3v3m0 2.5h.01",
+  chat: "M4 5h16v11H9l-5 4V5Z",
+  refresh: "M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7",
+  back: "m15 5-7 7 7 7",
+  send: "M12 19V5m0 0-6 6m6-6 6 6",
+  music: "M9 18V6l10-2v12M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm10-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z",
+  timer: "M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-12v4l2 2M10 2h4",
+  call: "M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z",
+  map: "M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14",
+  pin: "M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11Zm0-8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
+  mail: "M3 6h18v12H3zM3 6l9 7 9-7",
+  flag: "M5 21V4h11l-2 4 2 4H5",
+  more: "M5 12h.01M12 12h.01M19 12h.01",
+  camera: "M4 8h3l2-3h6l2 3h3v11H4zM12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z",
+  calendar: "M4 6h16v14H4zM4 10h16M8 3v4m8-4v4",
+  sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-15v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4",
+  photo: "M4 5h16v14H4zm0 11 5-5 4 4 3-3 4 4M15 9h.01",
+  wallet: "M4 7h16v12H4zM4 7l12-3v3m0 6h.01",
+  minus: "M5 12h14",
+  check:"m5 12 5 5 9-10",
   download: "M12 4v11m0 0-4-4m4 4 4-4M5 20h14",
   copy:"M8 8h12v12H8zM4 16V4h12",
   plus: "M12 5v14M5 12h14",
@@ -41,7 +67,7 @@ const paths = {
   sparkle:"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Zm7 12 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z",
 };
 
-export default function Icon({ name, className = "h-5 w-5" }) {
+export default function Icon({ name, className = "h-5 w-5", style }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -51,6 +77,7 @@ export default function Icon({ name, className = "h-5 w-5" }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
+      style={style}
       aria-hidden="true"
     >
       <path d={paths[name] ?? paths.sparkle} />

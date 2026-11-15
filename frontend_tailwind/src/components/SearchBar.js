@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
-import { searchAnimations } from "@/lib/animations";
+import { getProject, searchAnimations } from "@/lib/animations";
 
 export default function SearchBar() {
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function SearchBar() {
   }, []);
 
   function go(animation) {
-    router.push(`/animations/${animation.slug}`);
+    router.push(`/${animation.project}/${animation.slug}`);
     setQuery("");
     setOpen(false);
     inputRef.current?.blur();
@@ -64,7 +64,7 @@ export default function SearchBar() {
           aria-controls={listId}
           aria-activedescendant={open && results[active] ? `${listId}-${active}` : undefined}
           aria-label="Search animations"
-          placeholder="Search animations, e.g. spin, hover, loading"
+          placeholder="Search all projects, e.g. spin, sheet, chart"
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
@@ -110,7 +110,7 @@ export default function SearchBar() {
             )}
             {results.map((a, i) => (
               <li
-                key={a.slug}
+                key={`${a.project}-${a.slug}`}
                 id={`${listId}-${i}`}
                 role="option"
                 aria-selected={i === active}
@@ -123,8 +123,13 @@ export default function SearchBar() {
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-blue-100 text-blue-700">
                   <Icon name={a.icon} className="h-4 w-4" />
                 </span>
-                <span className="min-w-0">
-                  <span className="block text-sm font-medium text-gray-900">{a.title}</span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-900">{a.title}</span>
+                    <span className="rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-gray-500">
+                      {getProject(a.project).name}
+                    </span>
+                  </span>
                   <span className="block truncate text-xs text-gray-500">{a.description}</span>
                 </span>
               </li>

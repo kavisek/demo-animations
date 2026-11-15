@@ -86,6 +86,29 @@ module.exports = {
           "0%": { strokeDashoffset: "0" },
           "100%": { strokeDashoffset: "-12" },
         },
+        // --- iOS ---
+        jiggle: {
+          "0%, 100%": { transform: "rotate(-1.6deg)" },
+          "50%": { transform: "rotate(1.6deg)" },
+        },
+        "banner-in": {
+          "0%": { opacity: "0", transform: "translateY(-120%) scale(0.96)" },
+          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
+        },
+        "bubble-in": {
+          "0%": { opacity: "0", transform: "translateY(18px) scale(0.85)" },
+          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
+        },
+        "hud-in": {
+          "0%": { opacity: "0", transform: "scale(0.8)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+      },
+      transitionTimingFunction: {
+        // Overshoots slightly, like a spring
+        spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        // The curve iOS uses for sheets and navigation pushes
+        ios: "cubic-bezier(0.32, 0.72, 0, 1)",
       },
       animation: {
         "fade-up": "fade-up 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both",
@@ -109,6 +132,11 @@ module.exports = {
         "grow-x": "grow-x 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both",
         draw: "draw 1.4s ease-out both",
         march: "march 0.5s linear infinite",
+        // --- iOS ---
+        jiggle: "jiggle 0.28s ease-in-out infinite",
+        "banner-in": "banner-in 550ms cubic-bezier(0.34, 1.56, 0.64, 1) both",
+        "bubble-in": "bubble-in 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both",
+        "hud-in": "hud-in 300ms cubic-bezier(0.34, 1.56, 0.64, 1) both",
       },
     },
   },

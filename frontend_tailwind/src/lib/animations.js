@@ -1,7 +1,33 @@
-// Every animation page in the app. The sidebar, search bar, overview grid,
-// and /animations/[slug] routes are all generated from this list.
+// Every project and animation page in the app. The project picker, sidebar,
+// search bar, overview grids, and /[project]/[slug] routes are all generated
+// from these lists.
+export const projects = [
+  {
+    id: "web",
+    name: "Web Applications",
+    icon: "layers",
+    tagline: "Animations for web apps and dashboards",
+    description: "Entrances, loaders, and data-heavy table and spreadsheet interactions, built with Tailwind CSS.",
+  },
+  {
+    id: "ios",
+    name: "iOS Animations",
+    icon: "phone",
+    tagline: "Workflows you see every day on iOS",
+    description: "Dynamic Island, sheets, swipe actions, navigation, and more, recreated in the browser with Tailwind CSS.",
+  },
+  {
+    id: "charts",
+    name: "Data Visualizations",
+    icon: "chart",
+    tagline: "Charts that move with their data",
+    description: "Bars, lines, donuts, races, and live streams that animate on load and between datasets, with tooltips and table views.",
+  },
+];
+
 export const animations = [
   {
+    project: "web",
     group: "Motion basics",
     slug: "fade",
     title: "Fade & stagger",
@@ -11,6 +37,7 @@ export const animations = [
     classes: "animate-fade-up [animation-delay:120ms]",
   },
   {
+    project: "web",
     group: "Motion basics",
     slug: "slide",
     title: "Slide-in panels",
@@ -20,6 +47,7 @@ export const animations = [
     classes: "animate-slide-in-left · animate-slide-in-right",
   },
   {
+    project: "web",
     group: "Motion basics",
     slug: "bounce",
     title: "Bounce",
@@ -29,6 +57,7 @@ export const animations = [
     classes: "animate-bounce [animation-delay:-150ms]",
   },
   {
+    project: "web",
     group: "Motion basics",
     slug: "spinners",
     title: "Loaders & spinners",
@@ -38,6 +67,7 @@ export const animations = [
     classes: "animate-spin border-t-transparent",
   },
   {
+    project: "web",
     group: "Motion basics",
     slug: "pulse",
     title: "Pulse & ping",
@@ -47,6 +77,7 @@ export const animations = [
     classes: "animate-ping · animate-pulse",
   },
   {
+    project: "web",
     group: "Motion basics",
     slug: "wave",
     title: "Audio wave",
@@ -56,6 +87,7 @@ export const animations = [
     classes: "animate-wave origin-bottom",
   },
   {
+    project: "web",
     group: "Motion basics",
     slug: "flip",
     title: "3D flip cards",
@@ -65,6 +97,7 @@ export const animations = [
     classes: "[transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]",
   },
   {
+    project: "web",
     group: "Motion basics",
     slug: "orbit",
     title: "Orbit",
@@ -74,6 +107,7 @@ export const animations = [
     classes: "animate-spin-slow · animate-spin-reverse",
   },
   {
+    project: "web",
     group: "Motion basics",
     slug: "typewriter",
     title: "Typewriter",
@@ -83,6 +117,7 @@ export const animations = [
     classes: "animate-typing overflow-hidden whitespace-nowrap border-r-2",
   },
   {
+    project: "web",
     group: "Motion basics",
     slug: "gradient",
     title: "Gradient & shimmer",
@@ -92,6 +127,7 @@ export const animations = [
     classes: "animate-gradient-pan bg-[length:200%_200%]",
   },
   {
+    project: "web",
     group: "Tables & data",
     slug: "table-rows",
     title: "Row add & remove",
@@ -101,6 +137,7 @@ export const animations = [
     classes: "animate-row-insert · animate-fade-out (then remove on animationend)",
   },
   {
+    project: "web",
     group: "Tables & data",
     slug: "table-sort",
     title: "Sort & reorder",
@@ -110,6 +147,7 @@ export const animations = [
     classes: "FLIP: transform: translateY(Δ) → transition-transform duration-500",
   },
   {
+    project: "web",
     group: "Tables & data",
     slug: "live-cells",
     title: "Live cell updates",
@@ -119,6 +157,7 @@ export const animations = [
     classes: "animate-flash-up · animate-flash-down (key change restarts it)",
   },
   {
+    project: "web",
     group: "Tables & data",
     slug: "spreadsheet",
     title: "Spreadsheet grid",
@@ -128,6 +167,7 @@ export const animations = [
     classes: "transition-all duration-150 · stroke-dasharray + animate-march",
   },
   {
+    project: "web",
     group: "Tables & data",
     slug: "table-expand",
     title: "Expandable rows",
@@ -137,6 +177,7 @@ export const animations = [
     classes: "grid-rows-[0fr] → grid-rows-[1fr] transition-[grid-template-rows]",
   },
   {
+    project: "web",
     group: "Tables & data",
     slug: "table-loading",
     title: "Table loading",
@@ -146,6 +187,7 @@ export const animations = [
     classes: "animate-shimmer → animate-fade-up [animation-delay]",
   },
   {
+    project: "web",
     group: "Tables & data",
     slug: "data-bars",
     title: "Data bars & heatmap",
@@ -155,6 +197,7 @@ export const animations = [
     classes: "origin-left animate-grow-x · [stroke-dasharray:1] animate-draw",
   },
   {
+    project: "web",
     group: "Tables & data",
     slug: "table-filter",
     title: "Filter & search",
@@ -163,20 +206,206 @@ export const animations = [
     tags: ["table", "filter", "search", "collapse", "highlight"],
     classes: "grid-rows-[1fr] → grid-rows-[0fr] opacity-0 transition-all",
   },
+  {
+    project: "ios",
+    group: "System UI",
+    slug: "dynamic-island",
+    title: "Dynamic Island",
+    icon: "island",
+    description: "The pill at the top of the screen morphs between a timer, music, and an incoming call, then expands on tap.",
+    tags: ["ios", "live activity", "morph", "spring", "pill"],
+    classes: "transition-all duration-500 ease-spring · width/height/border-radius",
+  },
+  {
+    project: "ios",
+    group: "System UI",
+    slug: "notifications",
+    title: "Notification banners",
+    icon: "bell",
+    description: "Banners drop in with a spring, stack up, then tuck into a pile on the lock screen.",
+    tags: ["ios", "notification", "banner", "lock screen", "stack"],
+    classes: "animate-banner-in · scale + translate stacking",
+  },
+  {
+    project: "ios",
+    group: "System UI",
+    slug: "app-launch",
+    title: "App launch & jiggle",
+    icon: "apps",
+    description: "Tap an icon and the app zooms out of it; go home and it shrinks back. Edit mode makes the icons jiggle.",
+    tags: ["ios", "home screen", "zoom", "launch", "jiggle", "edit"],
+    classes: "transition-all duration-500 ease-ios · animate-jiggle",
+  },
+  {
+    project: "ios",
+    group: "System UI",
+    slug: "alerts",
+    title: "Alerts, sheets & HUDs",
+    icon: "alert",
+    description: "Alerts scale down into place, action sheets slide up from the bottom, and a HUD confirms with a drawn checkmark.",
+    tags: ["ios", "alert", "dialog", "action sheet", "hud", "modal"],
+    classes: "scale-[1.15] → scale-100 · translate-y-full → translate-y-0",
+  },
+  {
+    project: "ios",
+    group: "Navigation",
+    slug: "push-navigation",
+    title: "Push navigation",
+    icon: "stack",
+    description: "Drill into a settings screen: the new page slides in from the right while the old one parallaxes away.",
+    tags: ["ios", "navigation", "stack", "push", "pop", "large title"],
+    classes: "translateX(100%) → 0 · previous screen translateX(-30%)",
+  },
+  {
+    project: "ios",
+    group: "Navigation",
+    slug: "bottom-sheet",
+    title: "Bottom sheet",
+    icon: "sheet",
+    description: "A draggable sheet that snaps between peek, medium, and large heights, like Maps.",
+    tags: ["ios", "sheet", "drag", "detent", "gesture", "maps"],
+    classes: "translateY(detent) transition-transform ease-ios · pointer drag",
+  },
+  {
+    project: "ios",
+    group: "Lists & input",
+    slug: "swipe-actions",
+    title: "Swipe actions",
+    icon: "swipe",
+    description: "Swipe a row left to reveal actions or right to mark it read. Deleted rows collapse away, like Mail.",
+    tags: ["ios", "list", "swipe", "gesture", "mail", "delete"],
+    classes: "translateX(drag) · grid-rows-[1fr] → grid-rows-[0fr]",
+  },
+  {
+    project: "ios",
+    group: "Lists & input",
+    slug: "pull-to-refresh",
+    title: "Pull to refresh",
+    icon: "refresh",
+    description: "Pull the list down: the spinner fills in spoke by spoke, spins while loading, and new rows slide in.",
+    tags: ["ios", "refresh", "pull", "spinner", "gesture", "list"],
+    classes: "animate-spin [animation-timing-function:steps(8)] · rubber-band drag",
+  },
+  {
+    project: "ios",
+    group: "Lists & input",
+    slug: "controls",
+    title: "Switches & controls",
+    icon: "toggle",
+    description: "Toggle switches with a stretchy knob, a sliding segmented control, a stepper, and bars that spring to new values.",
+    tags: ["ios", "switch", "toggle", "segmented control", "stepper", "settings"],
+    classes: "translate-x-5 ease-spring · group-active:w-[33px]",
+  },
+  {
+    project: "ios",
+    group: "Lists & input",
+    slug: "chat",
+    title: "Chat bubbles",
+    icon: "chat",
+    description: "Sent messages rise out of the input, a typing indicator bounces, and replies pop in from the other side.",
+    tags: ["ios", "messages", "chat", "bubble", "typing indicator"],
+    classes: "animate-bubble-in origin-bottom-right · animate-bounce",
+  },
+  {
+    project: "charts",
+    group: "Comparisons",
+    slug: "chart-columns",
+    title: "Morphing columns",
+    icon: "chart",
+    description: "Columns grow from the baseline on load, then spring to new heights when you switch metrics.",
+    tags: ["chart", "bar", "column", "transition", "dataset switch"],
+    classes: "transition-[height] duration-700 ease-spring · origin-bottom",
+  },
+  {
+    project: "charts",
+    group: "Comparisons",
+    slug: "chart-stacked",
+    title: "Stacked ↔ grouped",
+    icon: "layers",
+    description: "The same columns rearrange between stacked and side-by-side, so you can compare totals or parts.",
+    tags: ["chart", "stacked", "grouped", "bar", "layout transition"],
+    classes: "transition-all duration-700 ease-ios on left/width/bottom/height",
+  },
+  {
+    project: "charts",
+    group: "Comparisons",
+    slug: "chart-race",
+    title: "Bar chart race",
+    icon: "sort",
+    description: "Ranked bars overtake each other year by year, with the leader's lead growing in real time.",
+    tags: ["chart", "race", "ranking", "time", "reorder", "story"],
+    classes: "top: rank × rowHeight · transition-all duration-700",
+  },
+  {
+    project: "charts",
+    group: "Trends",
+    slug: "chart-line",
+    title: "Line draw & crosshair",
+    icon: "wave",
+    description: "Lines draw themselves left to right, the area fades in, and a crosshair follows your pointer.",
+    tags: ["chart", "line", "area", "draw", "tooltip", "crosshair"],
+    classes: "pathLength=1 [stroke-dasharray:1] animate-draw · animate-fade-in",
+  },
+  {
+    project: "charts",
+    group: "Trends",
+    slug: "chart-live",
+    title: "Live streaming line",
+    icon: "bolt",
+    description: "A real-time chart: a new point arrives every second and the line scrolls smoothly to make room.",
+    tags: ["chart", "realtime", "streaming", "line", "monitoring"],
+    classes: "translateX(-step) → 0 transition-transform linear",
+  },
+  {
+    project: "charts",
+    group: "Parts & relationships",
+    slug: "chart-donut",
+    title: "Donut sweep",
+    icon: "orbit",
+    description: "Segments sweep around the ring one after another while the total counts up in the middle.",
+    tags: ["chart", "donut", "pie", "proportion", "count up"],
+    classes: "stroke-dasharray sweep · transition-[stroke-dasharray]",
+  },
+  {
+    project: "charts",
+    group: "Parts & relationships",
+    slug: "chart-scatter",
+    title: "Scatter transitions",
+    icon: "sparkle",
+    description: "Points drop into place, glide when the x-axis metric changes, and fade back when you filter a group.",
+    tags: ["chart", "scatter", "bubble", "filter", "correlation"],
+    classes: "transition-transform duration-700 · opacity on filter",
+  },
+  {
+    project: "charts",
+    group: "Dashboards",
+    slug: "chart-kpi",
+    title: "KPI tiles & gauges",
+    icon: "pulse",
+    description: "Headline numbers count up, sparklines draw, and progress rings fill to their targets.",
+    tags: ["chart", "kpi", "stat tile", "gauge", "sparkline", "dashboard"],
+    classes: "requestAnimationFrame count-up · stroke-dashoffset ring",
+  },
 ];
 
-// Sidebar sections and overview groups, in display order
-export const groups = [...new Set(animations.map((a) => a.group))];
+// Sidebar sections and overview groups for one project, in display order
+export function groupsFor(project) {
+  return [...new Set(animations.filter((a) => a.project === project).map((a) => a.group))];
+}
 
-export function getAnimation(slug) {
-  return animations.find((a) => a.slug === slug);
+export function getProject(id) {
+  return projects.find((p) => p.id === id);
+}
+
+export function getAnimation(project, slug) {
+  return animations.find((a) => a.project === project && a.slug === slug);
 }
 
 export function searchAnimations(query) {
   const q = query.trim().toLowerCase();
   if (!q) return animations;
   return animations.filter((a) =>
-    [a.title, a.description, a.slug, ...a.tags].some((field) =>
+    [a.title, a.description, a.slug, getProject(a.project).name, ...a.tags].some((field) =>
       field.toLowerCase().includes(q),
     ),
   );

@@ -3,32 +3,36 @@ import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
 import Replayable from "@/components/Replayable";
 import { demos } from "@/components/demoRegistry";
-import { animations, getAnimation } from "@/lib/animations";
+import { animations, getAnimation, getProject } from "@/lib/animations";
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return animations.map((a) => ({ slug: a.slug }));
+  return animations.map((a) => ({ project: a.project, slug: a.slug }));
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const animation = getAnimation(slug);
+  const { project, slug } = await params;
+  const animation = getAnimation(project, slug);
   return animation ? { title: animation.title, description: animation.description } : {};
 }
 
 export default async function AnimationPage({ params }) {
-  const { slug } = await params;
-  const animation = getAnimation(slug);
+  const { project: projectId, slug } = await params;
+  const project = getProject(projectId);
+  const animation = getAnimation(projectId, slug);
   const Demo = demos[slug];
-  if (!animation || !Demo) notFound();
+  if (!project || !animation || !Demo) notFound();
 
-  const index = animations.indexOf(animation);
-  const next = animations[(index + 1) % animations.length];
+  // "Next" cycles through this project's demos only
+  const siblings = animations.filter((a) => a.project === projectId);
+  const next = siblings[(siblings.indexOf(animation) + 1) % siblings.length];
 
   return (
     <>
-      <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1 text-sm text-gray-500">
-        <Link href="/" className="hover:text-blue-700 hover:underline">
-          Overview
+      <nav aria-label="Breadcrumb" className="mb-2 flex flex-wrap items-center gap-1 text-sm text-gray-500">
+        <Link href={`/${project.id}`} className="hover:text-blue-700 hover:underline">
+          {project.name}
         </Link>
         <Icon name="chevron" className="h-4 w-4" />
         <span>{animation.group}</span>
@@ -49,7 +53,7 @@ export default async function AnimationPage({ params }) {
 
       <div className="mt-6 flex justify-end">
         <Link
-          href={`/animations/${next.slug}`}
+          href={`/${next.project}/${next.slug}`}
           className="group inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:underline"
         >
           Next: {next.title}
