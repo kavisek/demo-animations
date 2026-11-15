@@ -74,7 +74,7 @@ export default function SearchBar() {
           onFocus={() => setOpen(true)}
           onBlur={() => setOpen(false)}
           onKeyDown={onKeyDown}
-          className="min-w-0 flex-1 bg-transparent text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none [&::-webkit-search-cancel-button]:hidden"
+          className="min-w-0 flex-1 bg-transparent text-sm text-gray-900 placeholder:text-gray-500 focus:outline-hidden [&::-webkit-search-cancel-button]:hidden"
         />
         {query ? (
           <button
@@ -87,7 +87,7 @@ export default function SearchBar() {
             <Icon name="close" className="h-4 w-4" />
           </button>
         ) : (
-          <kbd className="hidden rounded border border-gray-300 bg-white px-1.5 font-mono text-xs text-gray-500 sm:block">
+          <kbd className="hidden rounded-sm border border-gray-300 bg-white px-1.5 font-mono text-xs text-gray-500 sm:block">
             /
           </kbd>
         )}
@@ -126,7 +126,7 @@ export default function SearchBar() {
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-2">
                     <span className="text-sm font-medium text-gray-900">{a.title}</span>
-                    <span className="rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-gray-500">
+                    <span className="rounded-sm bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-gray-500">
                       {getProject(a.project).name}
                     </span>
                   </span>

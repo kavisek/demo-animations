@@ -10,7 +10,7 @@ function IconButton({ icon, label, onClick }) {
       onClick={onClick}
       aria-label={label}
       title={label}
-      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-gray-600 transition hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-gray-600 transition hover:bg-gray-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500"
     >
       <Icon name={icon} />
     </button>
@@ -19,11 +19,11 @@ function IconButton({ icon, label, onClick }) {
 
 export default function Header({ onMenu }) {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 flex h-14 items-center gap-2 border-b border-gray-200 bg-white px-2 shadow-sm sm:gap-4 sm:px-3">
+    <header className="fixed inset-x-0 top-0 z-40 flex h-14 items-center gap-2 border-b border-gray-200 bg-white px-2 shadow-xs sm:gap-4 sm:px-3">
       <IconButton icon="menu" label="Toggle navigation menu" onClick={onMenu} />
 
       <Link href="/" className="flex shrink-0 items-center gap-2 rounded-md pr-1" aria-label="Motion Console home">
-        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 via-indigo-500 to-violet-500 text-white shadow-sm">
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 via-indigo-500 to-violet-500 text-white shadow-xs">
           <Icon name="sparkle" className="h-5 w-5" />
         </span>
         <span className="hidden text-lg font-medium tracking-tight text-gray-800 lg:block">

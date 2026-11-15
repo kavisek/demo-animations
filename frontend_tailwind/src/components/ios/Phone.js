@@ -10,9 +10,9 @@ export function Phone({ children, screenClass = "bg-white text-gray-900", screen
   return (
     <div className="relative mx-auto w-[290px] shrink-0 rounded-[52px] bg-gray-900 p-[10px] shadow-2xl ring-1 ring-gray-700">
       {/* Side buttons */}
-      <span className="absolute -left-[3px] top-28 h-8 w-[3px] rounded-l bg-gray-700" />
-      <span className="absolute -left-[3px] top-40 h-14 w-[3px] rounded-l bg-gray-700" />
-      <span className="absolute -right-[3px] top-36 h-20 w-[3px] rounded-r bg-gray-700" />
+      <span className="absolute left-[-3px] top-28 h-8 w-[3px] rounded-l bg-gray-700" />
+      <span className="absolute left-[-3px] top-40 h-14 w-[3px] rounded-l bg-gray-700" />
+      <span className="absolute right-[-3px] top-36 h-20 w-[3px] rounded-r bg-gray-700" />
       <div
         ref={screenRef}
         className={`relative isolate overflow-hidden rounded-[42px] font-sans ${screenClass}`}
@@ -34,7 +34,7 @@ export function StatusBar({ light = false }) {
         {/* Signal */}
         <span className="flex items-end gap-[2px]">
           {[4, 6, 8, 10].map((h) => (
-            <span key={h} className={`w-[3px] rounded-sm ${fill}`} style={{ height: h }} />
+            <span key={h} className={`w-[3px] rounded-xs ${fill}`} style={{ height: h }} />
           ))}
         </span>
         {/* Battery */}
@@ -77,7 +77,7 @@ export function Wallpaper({ className = "" }) {
 export function Stage({ phone, children }) {
   return (
     <div className="grid items-start gap-8 lg:grid-cols-[auto_minmax(0,1fr)]">
-      <div className="rounded-xl bg-gradient-to-b from-gray-100 to-gray-200/60 px-4 py-8">{phone}</div>
+      <div className="rounded-xl bg-linear-to-b from-gray-100 to-gray-200/60 px-4 py-8">{phone}</div>
       <div className="space-y-4">{children}</div>
     </div>
   );

@@ -1,6 +1,275 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/*
+  `inline` puts these values straight into the font-sans / font-mono utilities. The Geist
+  variables come from next/font and are only defined on <body>, so resolving them on
+  :root (the default for @theme) would fail and fall back to the system font.
+*/
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+@theme {
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-fade-up: fade-up 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-slide-in-left: slide-in-left 600ms cubic-bezier(0.2, 0.8, 0.2, 1)
+    both;
+  --animate-slide-in-right: slide-in-right 600ms cubic-bezier(0.2, 0.8, 0.2, 1)
+    both;
+  --animate-wave: wave 1.1s ease-in-out infinite;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-spin-slow: spin 8s linear infinite;
+  --animate-spin-slower: spin 14s linear infinite;
+  --animate-spin-reverse: spin 10s linear infinite reverse;
+  --animate-typing:
+    typing 2.4s steps(28, end) both, caret 0.8s step-end infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-gradient-pan: gradient-pan 6s ease infinite;
+  --animate-pop-in: pop-in 150ms ease-out both;
+  --animate-fade-in: fade-in 400ms ease-out both;
+  --animate-fade-out: fade-out 300ms ease-in both;
+  --animate-flash-up: flash-up 1.2s ease-out;
+  --animate-flash-down: flash-down 1.2s ease-out;
+  --animate-row-insert: fade-in 300ms ease-out both, row-highlight 2s ease-out;
+  --animate-grow-x: grow-x 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-draw: draw 1.4s ease-out both;
+  --animate-march: march 0.5s linear infinite;
+  --animate-jiggle: jiggle 0.28s ease-in-out infinite;
+  --animate-banner-in: banner-in 550ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-bubble-in: bubble-in 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-hud-in: hud-in 300ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-in-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-48px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes slide-in-right {
+    0% {
+      opacity: 0;
+      transform: translateX(48px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes wave {
+    0%,
+    100% {
+      transform: scaleY(0.3);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  @keyframes typing {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: var(--typing-width, 100%);
+    }
+  }
+  @keyframes caret {
+    0%,
+    100% {
+      border-color: transparent;
+    }
+    50% {
+      border-color: currentColor;
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes gradient-pan {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  @keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.96) translateY(-4px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+  }
+  @keyframes flash-up {
+    0% {
+      background-color: rgb(187 247 208);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+  @keyframes flash-down {
+    0% {
+      background-color: rgb(254 202 202);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+  @keyframes row-highlight {
+    0%,
+    30% {
+      background-color: rgb(254 249 195);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+  @keyframes grow-x {
+    0% {
+      transform: scaleX(0);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes draw {
+    0% {
+      stroke-dashoffset: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes march {
+    0% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: -12;
+    }
+  }
+  @keyframes jiggle {
+    0%,
+    100% {
+      transform: rotate(-1.6deg);
+    }
+    50% {
+      transform: rotate(1.6deg);
+    }
+  }
+  @keyframes banner-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-120%) scale(0.96);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes bubble-in {
+    0% {
+      opacity: 0;
+      transform: translateY(18px) scale(0.85);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes hud-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+/*
+  Tailwind CSS v4 no longer gives buttons a pointer cursor. Keep the v3 behavior,
+  since most of this UI is buttons.
+*/
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
 
 body {
   @apply bg-gray-50 text-gray-900;

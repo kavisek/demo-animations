@@ -26,7 +26,7 @@ function WaveBars({ className = "bg-pink-400" }) {
   return (
     <span className="flex h-3.5 items-end gap-[2px]">
       {[0, 1, 2, 3].map((i) => (
-        <span key={i} style={{ animationDelay: `${i * -0.25}s` }} className={`h-full w-[3px] origin-bottom animate-wave rounded-sm ${className}`} />
+        <span key={i} style={{ animationDelay: `${i * -0.25}s` }} className={`h-full w-[3px] origin-bottom animate-wave rounded-xs ${className}`} />
       ))}
     </span>
   );
@@ -69,14 +69,14 @@ export function DynamicIslandDemo() {
               )}
               {mode === "music" && (
                 <div className="flex h-full items-center justify-between px-2.5">
-                  <span className="h-6 w-6 rounded-md bg-gradient-to-br from-pink-500 to-orange-400" />
+                  <span className="h-6 w-6 rounded-md bg-linear-to-br from-pink-500 to-orange-400" />
                   <WaveBars />
                 </div>
               )}
               {mode === "expanded" && (
                 <div className="flex h-full flex-col justify-between p-5">
                   <div className="flex items-center gap-3">
-                    <span className="h-12 w-12 animate-gradient-pan rounded-xl bg-gradient-to-br from-pink-500 via-fuchsia-500 to-orange-400 bg-[length:200%_200%]" />
+                    <span className="h-12 w-12 animate-gradient-pan rounded-xl bg-linear-to-br from-pink-500 via-fuchsia-500 to-orange-400 bg-size-[200%_200%]" />
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-semibold">Latency Lullaby</p>
                       <p className="truncate text-xs text-white/60">The Load Balancers</p>
@@ -107,7 +107,7 @@ export function DynamicIslandDemo() {
                     <p className="truncate text-sm font-semibold">Jordan Rivera</p>
                   </div>
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500">
-                    <Icon name="call" className="h-5 w-5 rotate-[135deg]" />
+                    <Icon name="call" className="h-5 w-5 rotate-135" />
                   </span>
                   <span className="flex h-10 w-10 animate-pulse items-center justify-center rounded-full bg-green-500">
                     <Icon name="call" className="h-5 w-5" />
@@ -311,18 +311,18 @@ function AppIcon({ app, jiggle, i, onOpen, label = true }) {
       <span
         data-tile
         style={{ animationDelay: `${(i % 3) * -0.09}s` }}
-        className={`flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-gradient-to-br text-white shadow-md transition-transform active:scale-90 ${gradient} ${
+        className={`flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-linear-to-br text-white shadow-md transition-transform active:scale-90 ${gradient} ${
           jiggle ? "animate-jiggle" : ""
         }`}
       >
         <Icon name={icon} className="h-6 w-6" />
       </span>
       {jiggle && (
-        <span className="absolute -left-1 -top-1 flex h-5 w-5 animate-hud-in items-center justify-center rounded-full bg-gray-300/90 text-gray-700 shadow">
+        <span className="absolute -left-1 -top-1 flex h-5 w-5 animate-hud-in items-center justify-center rounded-full bg-gray-300/90 text-gray-700 shadow-sm">
           <Icon name="minus" className="h-3 w-3" />
         </span>
       )}
-      {label && <span className="text-[11px] font-medium text-white drop-shadow">{name}</span>}
+      {label && <span className="text-[11px] font-medium text-white drop-shadow-sm">{name}</span>}
     </button>
   );
 }
@@ -357,7 +357,7 @@ export function AppLaunchDemo() {
               <button
                 type="button"
                 onClick={() => setJiggle(false)}
-                className="absolute right-4 top-11 z-20 animate-hud-in rounded-full bg-white/30 px-3 py-0.5 text-xs font-semibold text-white backdrop-blur"
+                className="absolute right-4 top-11 z-20 animate-hud-in rounded-full bg-white/30 px-3 py-0.5 text-xs font-semibold text-white backdrop-blur-sm"
               >
                 Done
               </button>
@@ -380,7 +380,7 @@ export function AppLaunchDemo() {
                 if (e.propertyName === "width" && launch.phase === "closing") setLaunch(null);
               }}
               style={{ ...rect, borderRadius: isOpen ? 42 : 14 }}
-              className={`absolute z-30 overflow-hidden bg-gradient-to-br text-white shadow-2xl transition-all duration-500 ease-ios ${launch.app[2]}`}
+              className={`absolute z-30 overflow-hidden bg-linear-to-br text-white shadow-2xl transition-all duration-500 ease-ios ${launch.app[2]}`}
             >
               <div className={`flex h-full flex-col items-center justify-center gap-3 transition-opacity duration-300 ${isOpen ? "opacity-100 delay-150" : "opacity-0"}`}>
                 <Icon name={launch.app[1]} className="h-14 w-14" />
@@ -422,7 +422,7 @@ function SettingsList() {
         {Array.from({ length: 12 }, (_, i) => (
           <span
             key={i}
-            className="aspect-square rounded-sm"
+            className="aspect-square rounded-xs"
             style={{ background: `hsl(${(i * 37) % 360} 70% ${70 - (i % 3) * 8}%)` }}
           />
         ))}
@@ -500,7 +500,7 @@ export function AlertsDemo() {
 
           {/* HUD: pops in, draws a checkmark, then fades */}
           {hud > 0 && (
-            <div key={hud} className="pointer-events-none absolute left-1/2 top-1/2 z-50 -ml-[70px] -mt-[70px] flex h-[140px] w-[140px] animate-hud-in flex-col items-center justify-center gap-2 rounded-3xl bg-gray-900/80 text-white backdrop-blur-xl">
+            <div key={hud} className="pointer-events-none absolute left-1/2 top-1/2 z-50 ml-[-70px] mt-[-70px] flex h-[140px] w-[140px] animate-hud-in flex-col items-center justify-center gap-2 rounded-3xl bg-gray-900/80 text-white backdrop-blur-xl">
               <svg viewBox="0 0 24 24" className="h-14 w-14" aria-hidden="true">
                 <path d="m5 12.5 4.5 4.5L19 7.5" pathLength="1" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ animationDelay: "120ms" }} className="animate-draw [stroke-dasharray:1]" />
               </svg>

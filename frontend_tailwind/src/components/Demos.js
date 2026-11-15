@@ -35,7 +35,7 @@ function FadeDemo() {
             <div
               key={s.name}
               style={delay(i * 120)}
-              className="animate-fade-up rounded-lg border border-gray-200 p-4 shadow-sm"
+              className="animate-fade-up rounded-lg border border-gray-200 p-4 shadow-xs"
             >
               <span className={`mb-3 flex h-9 w-9 items-center justify-center rounded-md ${s.color}`}>
                 <Icon name={s.icon} className="h-5 w-5" />
@@ -176,7 +176,7 @@ function SpinnersDemo() {
           <div className="h-1.5 overflow-hidden rounded-full bg-blue-100">
             <div className="h-full w-2/3 animate-pulse rounded-full bg-blue-600" />
           </div>
-          <div className="h-1.5 animate-shimmer rounded-full bg-gradient-to-r from-blue-100 via-blue-600 to-blue-100 bg-[length:200%_100%]" />
+          <div className="h-1.5 animate-shimmer rounded-full bg-linear-to-r from-blue-100 via-blue-600 to-blue-100 bg-size-[200%_100%]" />
         </div>
       </Panel>
     </div>
@@ -237,8 +237,8 @@ function PulseDemo() {
           {[0, 1, 2].map((i) => (
             <div key={i} className="animate-pulse space-y-3 rounded-lg border border-gray-100 p-4">
               <div className="h-24 rounded-md bg-gray-200" />
-              <div className="h-3 w-3/4 rounded bg-gray-200" />
-              <div className="h-3 w-1/2 rounded bg-gray-200" />
+              <div className="h-3 w-3/4 rounded-sm bg-gray-200" />
+              <div className="h-3 w-1/2 rounded-sm bg-gray-200" />
             </div>
           ))}
         </div>
@@ -257,14 +257,14 @@ function WaveDemo() {
             <span
               key={i}
               style={{ height: `${h}%`, ...delay(i * -70) }}
-              className="w-2 origin-bottom animate-wave rounded-t bg-gradient-to-t from-blue-600 to-cyan-400 sm:w-3"
+              className="w-2 origin-bottom animate-wave rounded-t bg-linear-to-t from-blue-600 to-cyan-400 sm:w-3"
             />
           ))}
         </div>
       </Panel>
       <Panel title="Now playing">
         <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 shrink-0 animate-gradient-pan items-center justify-center rounded-md bg-gradient-to-br from-violet-500 via-fuchsia-500 to-orange-400 bg-[length:200%_200%]">
+          <div className="flex h-14 w-14 shrink-0 animate-gradient-pan items-center justify-center rounded-md bg-linear-to-br from-violet-500 via-fuchsia-500 to-orange-400 bg-size-[200%_200%]">
             <Icon name="wave" className="h-6 w-6 text-white" />
           </div>
           <div className="min-w-0 flex-1">
@@ -273,7 +273,7 @@ function WaveDemo() {
           </div>
           <div className="flex h-5 items-end gap-0.5">
             {[0, 1, 2, 3].map((i) => (
-              <span key={i} style={delay(i * -250)} className="h-full w-1 origin-bottom animate-wave rounded-sm bg-violet-600" />
+              <span key={i} style={delay(i * -250)} className="h-full w-1 origin-bottom animate-wave rounded-xs bg-violet-600" />
             ))}
           </div>
         </div>
@@ -286,16 +286,16 @@ function FlipDemo() {
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {services.slice(0, 3).map((s) => (
-        <div key={s.name} tabIndex={0} className="group h-56 rounded-lg [perspective:1000px] focus:outline-none">
-          <div className="relative h-full w-full rounded-lg shadow-sm transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus:[transform:rotateY(180deg)]">
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-lg border border-gray-200 bg-white [backface-visibility:hidden]">
+        <div key={s.name} tabIndex={0} className="group h-56 rounded-lg perspective-[1000px] focus:outline-hidden">
+          <div className="relative h-full w-full rounded-lg shadow-xs transition-transform duration-700 transform-3d group-hover:transform-[rotateY(180deg)] group-focus:transform-[rotateY(180deg)]">
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-lg border border-gray-200 bg-white backface-hidden">
               <span className={`flex h-14 w-14 items-center justify-center rounded-xl ${s.color}`}>
                 <Icon name={s.icon} className="h-7 w-7" />
               </span>
               <p className="text-lg font-medium text-gray-900">{s.name}</p>
               <p className="text-xs text-gray-500">Hover or focus to flip</p>
             </div>
-            <div className="absolute inset-0 flex flex-col justify-center gap-2 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 p-6 text-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
+            <div className="absolute inset-0 flex flex-col justify-center gap-2 rounded-lg bg-linear-to-br from-blue-600 to-indigo-700 p-6 text-white backface-hidden transform-[rotateY(180deg)]">
               <p className="text-sm uppercase tracking-wide text-blue-100">{s.name}</p>
               <p className="text-3xl font-semibold">{s.stat}</p>
               <p className="text-sm text-blue-100">Up 12% from last week</p>
@@ -325,7 +325,7 @@ function OrbitDemo() {
   return (
     <Panel title="Service mesh" subtitle="Two rings spinning in opposite directions at different speeds">
       <div className="relative mx-auto my-4 h-72 w-72">
-        <div className="absolute inset-[34%] flex animate-pulse items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg">
+        <div className="absolute inset-[34%] flex animate-pulse items-center justify-center rounded-full bg-linear-to-br from-blue-600 to-indigo-600 text-white shadow-lg">
           <Icon name="sparkle" className="h-8 w-8" />
         </div>
         <div className="absolute inset-[18%] animate-spin-slow rounded-full border border-dashed border-gray-300">
@@ -388,21 +388,21 @@ function TypewriterDemo() {
 function GradientDemo() {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <div className="flex min-h-48 animate-gradient-pan flex-col justify-end rounded-lg bg-gradient-to-r from-blue-600 via-violet-500 to-pink-500 bg-[length:200%_200%] p-6 text-white shadow-md lg:col-span-2">
+      <div className="flex min-h-48 animate-gradient-pan flex-col justify-end rounded-lg bg-linear-to-r from-blue-600 via-violet-500 to-pink-500 bg-size-[200%_200%] p-6 text-white shadow-md lg:col-span-2">
         <p className="text-sm uppercase tracking-wider text-white/80">Hero banner</p>
         <p className="text-3xl font-semibold">A background that never sits still</p>
       </div>
       <Panel title="Gradient text">
-        <p className="animate-gradient-pan bg-gradient-to-r from-blue-600 via-emerald-500 to-blue-600 bg-[length:200%_auto] bg-clip-text text-4xl font-bold text-transparent">
+        <p className="animate-gradient-pan bg-linear-to-r from-blue-600 via-emerald-500 to-blue-600 bg-size-[200%_auto] bg-clip-text text-4xl font-bold text-transparent">
           Ship faster.
         </p>
       </Panel>
       <Panel title="Shimmer placeholders" subtitle="A highlight sweeps across loading content">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 shrink-0 animate-shimmer rounded-full bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%]" />
+          <div className="h-12 w-12 shrink-0 animate-shimmer rounded-full bg-linear-to-r from-gray-100 via-gray-200 to-gray-100 bg-size-[200%_100%]" />
           <div className="flex-1 space-y-2">
-            <div className="h-3 w-3/4 animate-shimmer rounded bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%]" />
-            <div className="h-3 w-1/2 animate-shimmer rounded bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%]" />
+            <div className="h-3 w-3/4 animate-shimmer rounded-sm bg-linear-to-r from-gray-100 via-gray-200 to-gray-100 bg-size-[200%_100%]" />
+            <div className="h-3 w-1/2 animate-shimmer rounded-sm bg-linear-to-r from-gray-100 via-gray-200 to-gray-100 bg-size-[200%_100%]" />
           </div>
         </div>
       </Panel>

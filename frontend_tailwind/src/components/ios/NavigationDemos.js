@@ -57,7 +57,7 @@ function NavScreen({ screen, index, depth, onPush, onBack }) {
       className={`absolute inset-0 bg-gray-100 transition-transform duration-500 ease-ios ${index > 0 ? "shadow-[-10px_0_30px_rgba(0,0,0,0.12)]" : ""}`}
     >
       {/* Nav bar: the small centered title fades in once the large title scrolls away */}
-      <div className={`absolute inset-x-0 top-0 z-20 flex h-[88px] items-end px-3 pb-2 transition-colors duration-200 ${scrolled ? "border-b border-gray-300/70 bg-gray-100/90 backdrop-blur" : ""}`}>
+      <div className={`absolute inset-x-0 top-0 z-20 flex h-[88px] items-end px-3 pb-2 transition-colors duration-200 ${scrolled ? "border-b border-gray-300/70 bg-gray-100/90 backdrop-blur-sm" : ""}`}>
         {index > 0 && (
           <button type="button" onClick={onBack} className="flex items-center text-[17px] text-blue-600 active:opacity-50">
             <Icon name="back" className="-ml-1 h-6 w-6" />
@@ -155,12 +155,12 @@ function FakeMap() {
   return (
     <div className="absolute inset-0 bg-[#e9efe6]">
       {/* Blocks and roads */}
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_46px,#fff_46px,#fff_54px,transparent_54px),linear-gradient(0deg,transparent_62px,#fff_62px,#fff_70px,transparent_70px)] bg-[length:100px_110px]" />
-      <div className="absolute -left-10 top-40 h-6 w-[400px] rotate-[24deg] bg-amber-200" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_46px,#fff_46px,#fff_54px,transparent_54px),linear-gradient(0deg,transparent_62px,#fff_62px,#fff_70px,transparent_70px)] bg-size-[100px_110px]" />
+      <div className="absolute -left-10 top-40 h-6 w-[400px] rotate-24 bg-amber-200" />
       <div className="absolute left-12 top-24 h-24 w-28 rounded-2xl bg-green-200/80" />
       <div className="absolute bottom-0 right-0 h-40 w-40 rounded-tl-[60px] bg-sky-200" />
       <span className="absolute left-[126px] top-[180px] text-red-500">
-        <Icon name="pin" className="h-8 w-8 animate-bounce drop-shadow" />
+        <Icon name="pin" className="h-8 w-8 animate-bounce drop-shadow-sm" />
       </span>
     </div>
   );

@@ -125,9 +125,9 @@ export default function Spreadsheet() {
     <section className="overflow-hidden rounded-lg border border-gray-200 bg-white">
       {/* Formula bar */}
       <div className="flex flex-wrap items-center gap-2 border-b border-gray-200 px-3 py-2">
-        <span className="w-28 rounded border border-gray-300 px-2 py-1 font-mono text-sm text-gray-900">{label}</span>
+        <span className="w-28 rounded-sm border border-gray-300 px-2 py-1 font-mono text-sm text-gray-900">{label}</span>
         <span className="px-1 font-serif text-sm italic text-gray-500">fx</span>
-        <span key={label} className="min-w-0 flex-1 animate-fade-in truncate rounded border border-gray-200 px-2 py-1 font-mono text-sm text-gray-800">
+        <span key={label} className="min-w-0 flex-1 animate-fade-in truncate rounded-sm border border-gray-200 px-2 py-1 font-mono text-sm text-gray-800">
           {current.formula ?? fmt(current.value)}
         </span>
         <button
@@ -147,7 +147,7 @@ export default function Spreadsheet() {
           role="grid"
           aria-label="Regional revenue spreadsheet"
           onKeyDown={onKeyDown}
-          className="relative select-none text-sm focus:outline-none"
+          className="relative select-none text-sm focus:outline-hidden"
           style={{ width: COL_X.at(-1), height: HEAD_H + ROWS * ROW_H }}
         >
           {/* Column letters */}
