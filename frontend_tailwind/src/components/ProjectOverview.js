@@ -10,7 +10,7 @@ const hoverPreview = {
   spinners: "group-hover:animate-spin",
   pulse: "group-hover:animate-pulse",
   wave: "group-hover:animate-wave",
-  flip: "group-hover:[transform:rotateY(180deg)]",
+  flip: "group-hover:transform-[rotateY(180deg)]",
   orbit: "group-hover:animate-spin-slow",
   typewriter: "group-hover:animate-pulse",
   gradient: "group-hover:animate-float",
@@ -61,9 +61,9 @@ export default function ProjectOverview({ project }) {
   return (
     <>
       <section
-        className={`relative mb-8 animate-gradient-pan overflow-hidden rounded-xl bg-gradient-to-r bg-[length:200%_200%] p-6 text-white shadow-md sm:p-8 ${banners[project.id]}`}
+        className={`relative mb-8 animate-gradient-pan overflow-hidden rounded-xl bg-linear-to-r bg-size-[200%_200%] p-6 text-white shadow-md sm:p-8 ${banners[project.id]}`}
       >
-        <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 animate-spin-slower rounded-full border-[16px] border-dashed border-white/10" />
+        <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 animate-spin-slower rounded-full border-16 border-dashed border-white/10" />
         <div className="pointer-events-none absolute bottom-[-60px] right-24 h-32 w-32 animate-float rounded-full bg-white/10" />
         <p className="animate-fade-up text-sm font-medium uppercase tracking-wider text-blue-100">
           {project.name}
@@ -73,7 +73,7 @@ export default function ProjectOverview({ project }) {
         </h1>
         <p style={{ animationDelay: "200ms" }} className="mt-2 max-w-xl animate-fade-up text-sm text-white/80">
           {project.description} Switch projects from the header, or press{" "}
-          <kbd className="rounded bg-white/20 px-1.5 font-mono">/</kbd> to search every project.
+          <kbd className="rounded-sm bg-white/20 px-1.5 font-mono">/</kbd> to search every project.
         </p>
       </section>
 
@@ -107,9 +107,9 @@ export default function ProjectOverview({ project }) {
                 <div key={a.slug} style={{ animationDelay: `${400 + i * 60}ms` }} className="flex animate-fade-up">
                   <Link
                     href={`/${a.project}/${a.slug}`}
-                    className="group flex flex-1 flex-col rounded-lg border border-gray-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                    className="group flex flex-1 flex-col rounded-lg border border-gray-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md focus:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500"
                   >
-                    <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-700 [perspective:400px]">
+                    <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-700 perspective-[400px]">
                       <Icon
                         name={a.icon}
                         className={`h-6 w-6 origin-bottom transition-transform duration-500 ${hoverPreview[a.slug] ?? "group-hover:scale-110"}`}

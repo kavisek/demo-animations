@@ -66,7 +66,7 @@ export default function CodeViewer({ title, slug, code, onRefresh, onClose }) {
             type="button"
             onClick={onClose}
             aria-label="Close code panel"
-            className="rounded-full p-2 text-gray-500 transition hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="rounded-full p-2 text-gray-500 transition hover:bg-gray-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             <Icon name="close" />
           </button>
@@ -117,7 +117,7 @@ export default function CodeViewer({ title, slug, code, onRefresh, onClose }) {
               type="button"
               onClick={copy}
               disabled={!code}
-              className={`inline-flex min-w-[7.5rem] items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium text-white transition active:scale-95 ${
+              className={`inline-flex min-w-30 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium text-white transition active:scale-95 ${
                 copied ? "bg-green-600" : "bg-blue-600 hover:bg-blue-700"
               }`}
             >

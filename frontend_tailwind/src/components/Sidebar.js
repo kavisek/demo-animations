@@ -55,7 +55,7 @@ export default function Sidebar({ collapsed, mobileOpen, onClose }) {
               key={p.id}
               href={`/${p.id}`}
               className={`flex flex-col items-center gap-0.5 rounded-md px-1 py-1.5 text-[11px] font-medium transition ${
-                p.id === project.id ? "bg-white text-blue-700 shadow-sm" : "text-gray-600"
+                p.id === project.id ? "bg-white text-blue-700 shadow-xs" : "text-gray-600"
               }`}
             >
               <Icon name={p.icon} className="h-4 w-4" />

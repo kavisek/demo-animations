@@ -94,7 +94,7 @@ export const animations = [
     icon: "flip",
     description: "Hover or focus a card to rotate it in 3D and show its back face.",
     tags: ["transform", "3d", "hover", "transition"],
-    classes: "[transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]",
+    classes: "transform-3d group-hover:transform-[rotateY(180deg)]",
   },
   {
     project: "web",
@@ -124,7 +124,7 @@ export const animations = [
     icon: "sparkle",
     description: "Moving gradients for hero banners, and shimmer for loading content.",
     tags: ["background", "gradient", "skeleton", "hero"],
-    classes: "animate-gradient-pan bg-[length:200%_200%]",
+    classes: "animate-gradient-pan bg-size-[200%_200%]",
   },
   {
     project: "web",

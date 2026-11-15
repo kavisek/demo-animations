@@ -72,6 +72,8 @@ export function extractCss(root) {
   const matches = makeMatcher(els, root);
   const used = new Set();
   const keyframes = new Map();
+  const themeVars = new Map(); // Tailwind v4 theme: --color-*, --animate-*, … defined on :root
+  const properties = new Map(); // Tailwind v4 @property registrations for --tw-* variables
   let twDefaults = "";
 
   els.forEach((el) => animationNames(el.style?.animationName).forEach((n) => used.add(n)));
@@ -79,7 +81,15 @@ export function extractCss(root) {
   function walk(rules) {
     const out = [];
     for (const rule of rules) {
-      if (rule instanceof CSSStyleRule) {
+      if (typeof CSSPropertyRule !== "undefined" && rule instanceof CSSPropertyRule) {
+        properties.set(rule.name, rule.cssText);
+      } else if (rule instanceof CSSStyleRule) {
+        if (rule.selectorText.includes(":root")) {
+          for (const prop of rule.style) {
+            if (prop.startsWith("--")) themeVars.set(prop, rule.style.getPropertyValue(prop).trim());
+          }
+          continue;
+        }
         // Tailwind's per-element defaults for --tw-* variables, needed by transform/ring/shadow utilities
         if (rule.selectorText.startsWith("*") && rule.cssText.includes("--tw-")) {
           twDefaults ||= rule.cssText;
@@ -110,8 +120,27 @@ export function extractCss(root) {
     }
   }
 
+  // Keep only the theme variables the matched rules reference, following var() chains
+  const unique = [...new Set(rules)];
+  const body = unique.join("\n");
+  const refs = (text) => [...text.matchAll(/var\((--[\w-]+)/g)].map((m) => m[1]);
+  const needed = new Set();
+  const queue = refs(body);
+  while (queue.length) {
+    const name = queue.pop();
+    if (needed.has(name) || !themeVars.has(name)) continue;
+    needed.add(name);
+    queue.push(...refs(themeVars.get(name)));
+  }
+  // v4 animations are `animation: var(--animate-x)`; the keyframe name is the first word of each part
+  for (const name of needed) {
+    if (name.startsWith("--animate-")) themeVars.get(name).split(",").forEach((part) => used.add(part.trim().split(/\s+/)[0]));
+  }
+  const rootVars = needed.size ? `:root { ${[...needed].map((n) => `${n}: ${themeVars.get(n)};`).join(" ")} }` : "";
+  const props = [...properties].filter(([name]) => body.includes(name) || twDefaults.includes(name)).map(([, css]) => css);
+
   const frames = [...used].filter((n) => keyframes.has(n)).map((n) => keyframes.get(n));
-  return [twDefaults, ...[...new Set(rules)], ...frames].filter(Boolean).map(prettyRule).join("\n\n");
+  return [rootVars, ...props, twDefaults, ...unique, ...frames].filter(Boolean).map(prettyRule).join("\n\n");
 }
 
 // "a { b: c; d: e; }" → multi-line, for readability

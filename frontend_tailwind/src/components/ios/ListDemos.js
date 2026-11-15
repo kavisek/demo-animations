@@ -191,7 +191,7 @@ function Spinner({ progress, spinning }) {
       {Array.from({ length: 8 }, (_, i) => (
         <span
           key={i}
-          className="absolute left-1/2 top-0 -ml-[1.25px] h-[7px] w-[2.5px] origin-[50%_12px] rounded-full bg-gray-500 transition-opacity duration-100"
+          className="absolute left-1/2 top-0 ml-[-1.25px] h-[7px] w-[2.5px] origin-[50%_12px] rounded-full bg-gray-500 transition-opacity duration-100"
           style={{ transform: `rotate(${i * 45}deg)`, opacity: i < shown ? 1 - i * 0.09 : 0 }}
         />
       ))}
@@ -335,7 +335,7 @@ export function ControlsDemo() {
               {/* Segmented control: the white pill slides under the selected label */}
               <div className={`relative grid grid-cols-3 rounded-[9px] p-[2px] text-[13px] font-medium ${toggles.dark ? "bg-gray-800" : "bg-gray-200/80"}`}>
                 <span
-                  className={`absolute bottom-[2px] left-[2px] top-[2px] w-[calc((100%-4px)/3)] rounded-[7px] shadow transition-transform duration-300 ease-ios ${toggles.dark ? "bg-gray-600" : "bg-white"}`}
+                  className={`absolute bottom-[2px] left-[2px] top-[2px] w-[calc((100%-4px)/3)] rounded-[7px] shadow-sm transition-transform duration-300 ease-ios ${toggles.dark ? "bg-gray-600" : "bg-white"}`}
                   style={{ transform: `translateX(${range * 100}%)` }}
                 />
                 {ranges.map((r, i) => (
@@ -457,8 +457,8 @@ export function ChatDemo() {
         <Phone screenClass="bg-white text-gray-900">
           <StatusBar />
           <Island />
-          <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center border-b border-gray-200 bg-gray-50/90 pb-2 pt-12 backdrop-blur">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-gray-300 to-gray-500 text-xs font-semibold text-white">MC</span>
+          <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center border-b border-gray-200 bg-gray-50/90 pb-2 pt-12 backdrop-blur-sm">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-linear-to-br from-gray-300 to-gray-500 text-xs font-semibold text-white">MC</span>
             <span className="text-[11px] text-gray-600">Motion Crew</span>
           </div>
           <div ref={scrollRef} className="absolute inset-x-0 bottom-14 top-[104px] space-y-1.5 overflow-y-auto px-3 py-3">

@@ -77,7 +77,7 @@ export function ColumnsDemo() {
                   key={i}
                   onPointerEnter={() => setHover(i)}
                   onPointerLeave={() => setHover(null)}
-                  className={`relative flex h-full flex-1 items-end justify-center rounded-sm transition-colors ${hover === i ? "bg-gray-100/70" : ""}`}
+                  className={`relative flex h-full flex-1 items-end justify-center rounded-xs transition-colors ${hover === i ? "bg-gray-100/70" : ""}`}
                 >
                   <div
                     className="w-full max-w-[24px] rounded-t-[4px] transition-[height,opacity] duration-700 ease-spring"
@@ -570,7 +570,7 @@ export function DonutDemo() {
                 onBlur={() => setHover(null)}
                 className={`flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm transition ${hover === s.i ? "bg-gray-100" : ""}`}
               >
-                <span className="h-2.5 w-2.5 rounded-sm" style={{ background: SERIES[s.i] }} />
+                <span className="h-2.5 w-2.5 rounded-xs" style={{ background: SERIES[s.i] }} />
                 <span className="flex-1 text-left text-gray-700">{s.label}</span>
                 <span className="tabular-nums text-gray-900">{fmt(s.v)}</span>
                 <span className="w-12 text-right tabular-nums text-gray-500">{((s.v / total) * 100).toFixed(0)}%</span>

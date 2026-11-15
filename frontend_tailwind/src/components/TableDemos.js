@@ -393,7 +393,7 @@ export function ExpandDemo() {
 }
 
 // --- Table loading ---------------------------------------------------------
-const shimmer = "animate-shimmer rounded bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%]";
+const shimmer = "animate-shimmer rounded-sm bg-linear-to-r from-gray-100 via-gray-200 to-gray-100 bg-size-[200%_100%]";
 
 export function LoadingDemo() {
   const [loading, setLoading] = useState(true);
@@ -507,10 +507,10 @@ export function DataBarsDemo() {
               <tr key={u.service}>
                 <td className={`${td} font-medium text-gray-900`}>{u.service}</td>
                 <td className={td}>
-                  <div className="relative h-6 rounded bg-gray-50">
+                  <div className="relative h-6 rounded-sm bg-gray-50">
                     <div
                       style={{ width: `${(u.value / max) * 100}%`, ...delay(i * 100) }}
-                      className="absolute inset-y-0 left-0 origin-left animate-grow-x rounded bg-gradient-to-r from-blue-200 to-blue-500"
+                      className="absolute inset-y-0 left-0 origin-left animate-grow-x rounded-sm bg-linear-to-r from-blue-200 to-blue-500"
                     />
                     <span className="relative flex h-full items-center px-2 text-xs font-medium tabular-nums text-gray-900">
                       ${u.value.toLocaleString()}
@@ -539,7 +539,7 @@ export function DataBarsDemo() {
                     key={h}
                     title={`${day} ${String(h * 2).padStart(2, "0")}:00 · ${Math.round(v * 1000)} req/s`}
                     style={{ backgroundColor: `rgba(37, 99, 235, ${v})`, ...delay((d + h) * 35) }}
-                    className="h-7 animate-fade-in rounded-sm transition-transform hover:scale-110 hover:ring-2 hover:ring-blue-900/30"
+                    className="h-7 animate-fade-in rounded-xs transition-transform hover:scale-110 hover:ring-2 hover:ring-blue-900/30"
                   />
                 ))}
               </Fragment>
@@ -569,7 +569,7 @@ function Highlight({ text, query }) {
   return (
     <>
       {text.slice(0, i)}
-      <mark className="rounded-sm bg-yellow-200 px-0.5 text-gray-900">{text.slice(i, i + query.length)}</mark>
+      <mark className="rounded-xs bg-yellow-200 px-0.5 text-gray-900">{text.slice(i, i + query.length)}</mark>
       {text.slice(i + query.length)}
     </>
   );
@@ -594,7 +594,7 @@ export function FilterDemo() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Filter, e.g. revenue or csv"
             aria-label="Filter datasets"
-            className="w-48 bg-transparent text-sm focus:outline-none"
+            className="w-48 bg-transparent text-sm focus:outline-hidden"
           />
         </label>
       }

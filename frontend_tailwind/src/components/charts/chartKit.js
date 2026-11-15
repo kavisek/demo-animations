@@ -81,9 +81,9 @@ export function Legend({ items, onToggle, hidden = new Set() }) {
           <li key={label}>
             <Tag
               {...(onToggle ? { type: "button", onClick: () => onToggle(label), "aria-pressed": !off } : {})}
-              className={`flex items-center gap-1.5 transition-opacity ${off ? "opacity-40" : ""} ${onToggle ? "rounded px-1 hover:bg-gray-100" : ""}`}
+              className={`flex items-center gap-1.5 transition-opacity ${off ? "opacity-40" : ""} ${onToggle ? "rounded-sm px-1 hover:bg-gray-100" : ""}`}
             >
-              <span className="h-2.5 w-2.5 rounded-sm" style={{ background: color }} />
+              <span className="h-2.5 w-2.5 rounded-xs" style={{ background: color }} />
               {label}
             </Tag>
           </li>
@@ -97,7 +97,7 @@ export function Tooltip({ x, y, show, children, align = "center" }) {
   return (
     <div
       role="status"
-      className={`pointer-events-none absolute z-20 min-w-[7rem] rounded-md bg-white px-2.5 py-1.5 text-xs text-gray-700 shadow-lg ring-1 ring-black/10 transition-opacity duration-150 ${
+      className={`pointer-events-none absolute z-20 min-w-28 rounded-md bg-white px-2.5 py-1.5 text-xs text-gray-700 shadow-lg ring-1 ring-black/10 transition-opacity duration-150 ${
         show ? "opacity-100" : "opacity-0"
       }`}
       style={{ left: x, top: y, transform: `translate(${align === "center" ? "-50%" : align === "left" ? "8px" : "calc(-100% - 8px)"}, calc(-100% - 8px))` }}
@@ -111,7 +111,7 @@ export function TooltipRow({ color, label, value }) {
   return (
     <div className="flex items-center justify-between gap-3 whitespace-nowrap">
       <span className="flex items-center gap-1.5">
-        {color && <span className="h-2 w-2 rounded-sm" style={{ background: color }} />}
+        {color && <span className="h-2 w-2 rounded-xs" style={{ background: color }} />}
         {label}
       </span>
       <span className="font-medium tabular-nums text-gray-900">{value}</span>
@@ -138,7 +138,7 @@ export function ChartCard({ title, subtitle, controls, legend, table, children }
                 role="tab"
                 aria-selected={view === v}
                 onClick={() => setView(v)}
-                className={`rounded px-2.5 py-1 capitalize transition ${view === v ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-800"}`}
+                className={`rounded-sm px-2.5 py-1 capitalize transition ${view === v ? "bg-white text-gray-900 shadow-xs" : "text-gray-500 hover:text-gray-800"}`}
               >
                 {v}
               </button>
@@ -192,7 +192,7 @@ export function Pills({ options, value, onChange, label }) {
           role="radio"
           aria-checked={value === o}
           onClick={() => onChange(o)}
-          className={`rounded px-2.5 py-1 transition ${value === o ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-800"}`}
+          className={`rounded-sm px-2.5 py-1 transition ${value === o ? "bg-white text-gray-900 shadow-xs" : "text-gray-500 hover:text-gray-800"}`}
         >
           {o}
         </button>
