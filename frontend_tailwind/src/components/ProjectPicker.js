@@ -14,16 +14,17 @@ export function useCurrentProject() {
 
 export default function ProjectPicker() {
   const current = useCurrentProject();
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
   const pathname = usePathname();
-
-  useEffect(() => setOpen(false), [pathname]);
+  // The menu is open only on the page it was opened on, so navigating closes it
+  const [openPath, setOpenPath] = useState(null);
+  const open = openPath === pathname;
+  const setOpen = (value) => setOpenPath(value ? pathname : null);
+  const ref = useRef(null);
 
   useEffect(() => {
     if (!open) return;
-    const onDown = (e) => !ref.current?.contains(e.target) && setOpen(false);
-    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    const onDown = (e) => !ref.current?.contains(e.target) && setOpenPath(null);
+    const onKey = (e) => e.key === "Escape" && setOpenPath(null);
     document.addEventListener("mousedown", onDown);
     document.addEventListener("keydown", onKey);
     return () => {
@@ -36,7 +37,7 @@ export default function ProjectPicker() {
     <div ref={ref} className="relative hidden shrink-0 md:block">
       <button
         type="button"
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => setOpen(!open)}
         aria-haspopup="menu"
         aria-expanded={open}
         className={`flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm text-gray-700 transition hover:bg-gray-50 ${

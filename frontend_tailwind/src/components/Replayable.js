@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { snapshotDemo } from "@/lib/extractCode";
 import CodeViewer from "@/components/CodeViewer";
 import Icon from "@/components/Icon";
 
@@ -11,17 +12,18 @@ const buttonCls =
 // and Code (opens a panel with the demo's HTML and CSS).
 export default function Replayable({ title, slug, description, children }) {
   const [run, setRun] = useState(0);
-  const [showCode, setShowCode] = useState(false);
+  const [code, setCode] = useState(null); // a snapshot while the Code panel is open
   const demoRef = useRef(null);
-  const getRoot = useCallback(() => demoRef.current, []);
-  const close = useCallback(() => setShowCode(false), []);
+  // Read the demo when asked (on open and on Refresh); interactive demos change as you use them
+  const snapshot = () => setCode(snapshotDemo(demoRef.current, title));
+  const close = useCallback(() => setCode(null), []);
 
   return (
     <>
       <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-normal text-gray-900">{title}</h1>
         <div className="flex items-center gap-2">
-          <button type="button" onClick={() => setShowCode(true)} className={buttonCls}>
+          <button type="button" onClick={snapshot} className={buttonCls}>
             <Icon name="terminal" className="h-4 w-4" />
             Code
           </button>
@@ -35,7 +37,7 @@ export default function Replayable({ title, slug, description, children }) {
       <div key={run} ref={demoRef}>
         {children}
       </div>
-      {showCode && <CodeViewer title={title} slug={slug} getRoot={getRoot} onClose={close} />}
+      {code && <CodeViewer title={title} slug={slug} code={code} onRefresh={snapshot} onClose={close} />}
     </>
   );
 }
