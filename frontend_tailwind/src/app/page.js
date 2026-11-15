@@ -1,101 +1,103 @@
-import Image from "next/image";
+import Link from "next/link";
+import Icon from "@/components/Icon";
+import { animations, groups } from "@/lib/animations";
+
+// What each card's icon does on hover: a preview of the page behind it
+const hoverPreview = {
+  fade: "group-hover:animate-fade-up",
+  slide: "group-hover:animate-slide-in-left",
+  bounce: "group-hover:animate-bounce",
+  spinners: "group-hover:animate-spin",
+  pulse: "group-hover:animate-pulse",
+  wave: "group-hover:animate-wave",
+  flip: "group-hover:[transform:rotateY(180deg)]",
+  orbit: "group-hover:animate-spin-slow",
+  typewriter: "group-hover:animate-pulse",
+  gradient: "group-hover:animate-float",
+  "table-rows": "group-hover:animate-fade-up",
+  "table-sort": "group-hover:rotate-180",
+  "live-cells": "group-hover:animate-pulse",
+  spreadsheet: "group-hover:scale-110",
+  "table-expand": "group-hover:animate-bounce",
+  "table-loading": "group-hover:animate-pulse",
+  "data-bars": "group-hover:animate-wave",
+  "table-filter": "group-hover:animate-bounce",
+};
+
+const stats = [
+  { label: "Animations", value: animations.length, icon: "sparkle" },
+  { label: "Categories", value: groups.length, icon: "layers" },
+  { label: "Runtime JS for motion", value: "0 kB", icon: "terminal" },
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <section className="relative mb-8 animate-gradient-pan overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-[length:200%_200%] p-6 text-white shadow-md sm:p-8">
+        <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 animate-spin-slower rounded-full border-[16px] border-dashed border-white/10" />
+        <div className="pointer-events-none absolute bottom-[-60px] right-24 h-32 w-32 animate-float rounded-full bg-white/10" />
+        <p className="animate-fade-up text-sm font-medium uppercase tracking-wider text-blue-100">
+          Welcome to Motion Console
+        </p>
+        <h1 style={{ animationDelay: "100ms" }} className="mt-1 max-w-xl animate-fade-up text-2xl font-semibold sm:text-3xl">
+          A gallery of animations built with Tailwind CSS
+        </h1>
+        <p style={{ animationDelay: "200ms" }} className="mt-2 max-w-xl animate-fade-up text-sm text-blue-100">
+          Pick an animation from the sidebar, or press <kbd className="rounded bg-white/20 px-1.5 font-mono">/</kbd> to
+          search. Every demo uses Tailwind utilities and keyframes, with no animation library.
+        </p>
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className="mb-8 grid gap-4 sm:grid-cols-3">
+        {stats.map((s, i) => (
+          <div
+            key={s.label}
+            style={{ animationDelay: `${300 + i * 100}ms` }}
+            className="flex animate-fade-up items-center gap-4 rounded-lg border border-gray-200 bg-white p-4"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-700">
+              <Icon name={s.icon} />
+            </span>
+            <div>
+              <p className="text-2xl font-normal text-gray-900">{s.value}</p>
+              <p className="text-sm text-gray-500">{s.label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {groups.map((group) => (
+        <section key={group} className="mb-10">
+          <h2 className="mb-4 text-lg font-normal text-gray-900">{group}</h2>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {animations
+              .filter((a) => a.group === group)
+              .map((a, i) => (
+                // The entrance animation lives on a wrapper: its fill-mode would otherwise
+                // pin `transform` and cancel the card's hover lift.
+                <div key={a.slug} style={{ animationDelay: `${400 + i * 60}ms` }} className="flex animate-fade-up">
+                  <Link
+                    href={`/animations/${a.slug}`}
+                    className="group flex flex-1 flex-col rounded-lg border border-gray-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  >
+                    <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-700 [perspective:400px]">
+                      <Icon
+                        name={a.icon}
+                        className={`h-6 w-6 origin-bottom transition-transform duration-500 ${hoverPreview[a.slug]}`}
+                      />
+                    </span>
+                    <span className="font-medium text-gray-900">{a.title}</span>
+                    <span className="mt-1 flex-1 text-sm text-gray-600">{a.description}</span>
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-700">
+                      View demo
+                      <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </Link>
+                </div>
+              ))}
+          </div>
+        </section>
+      ))}
+    </>
   );
 }
