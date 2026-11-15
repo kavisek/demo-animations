@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
@@ -8,20 +8,20 @@ import Sidebar from "@/components/Sidebar";
 export default function AppShell({ children }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false); // desktop: icon-only rail
-  const [mobileOpen, setMobileOpen] = useState(false); // mobile: slide-over drawer
-
-  // Close the mobile drawer after navigating
-  useEffect(() => setMobileOpen(false), [pathname]);
+  // Mobile slide-over drawer. Storing the page it was opened on (instead of a boolean)
+  // closes it automatically after navigating, without an effect.
+  const [drawerPath, setDrawerPath] = useState(null);
+  const mobileOpen = drawerPath === pathname;
 
   function toggleMenu() {
     if (window.matchMedia("(min-width: 768px)").matches) setCollapsed((c) => !c);
-    else setMobileOpen((o) => !o);
+    else setDrawerPath((p) => (p === pathname ? null : pathname));
   }
 
   return (
     <>
       <Header onMenu={toggleMenu} />
-      <Sidebar collapsed={collapsed} mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <Sidebar collapsed={collapsed} mobileOpen={mobileOpen} onClose={() => setDrawerPath(null)} />
       <main
         className={`min-h-screen pt-14 transition-[padding] duration-200 ease-out ${
           collapsed ? "md:pl-[72px]" : "md:pl-64"

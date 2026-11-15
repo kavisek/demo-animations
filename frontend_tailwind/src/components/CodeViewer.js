@@ -1,8 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/Icon";
-import { extractCss, extractHtml, standaloneDocument } from "@/lib/extractCode";
 
 const TABS = [
   { id: "html", label: "HTML" },
@@ -10,29 +9,19 @@ const TABS = [
   { id: "file", label: "Standalone file" },
 ];
 
-export default function CodeViewer({ title, slug, getRoot, onClose }) {
+// `code` is a snapshot taken by the page when the panel opens; Refresh asks for a new one
+export default function CodeViewer({ title, slug, code, onRefresh, onClose }) {
   const [tab, setTab] = useState("html");
-  const [code, setCode] = useState(null);
   const [copied, setCopied] = useState(false);
   const closeRef = useRef(null);
   const preRef = useRef(null);
 
-  // Snapshot the demo as it is right now (interactive demos change as you use them)
-  const snapshot = useCallback(() => {
-    const root = getRoot();
-    if (!root) return;
-    const html = extractHtml(root);
-    const css = extractCss(root);
-    setCode({ html, css, file: standaloneDocument(title, html, css) });
-  }, [getRoot, title]);
-
   useEffect(() => {
-    snapshot();
     closeRef.current?.focus();
     const onKey = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [snapshot, onClose]);
+  }, [onClose]);
 
   const text = code?.[tab] ?? "";
   const lines = text ? text.split("\n").length : 0;
@@ -108,7 +97,7 @@ export default function CodeViewer({ title, slug, getRoot, onClose }) {
           <div className="flex items-center gap-2 py-2">
             <button
               type="button"
-              onClick={snapshot}
+              onClick={onRefresh}
               title="Re-read the demo, e.g. after sorting or selecting"
               className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm text-gray-700 transition hover:bg-gray-100"
             >

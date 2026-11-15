@@ -125,6 +125,13 @@ function prettyRule(css) {
     .replace(/^ {2}((?:[\d.]+%|from|to)(?:,\s*(?:[\d.]+%|from|to))*\s*\{)/gm, "$1");
 }
 
+// Everything the Code panel shows, read from the demo's DOM at this moment
+export function snapshotDemo(root, title) {
+  const html = extractHtml(root);
+  const css = extractCss(root);
+  return { html, css, file: standaloneDocument(title, html, css) };
+}
+
 export function standaloneDocument(title, html, css) {
   return `<!doctype html>
 <html lang="en">

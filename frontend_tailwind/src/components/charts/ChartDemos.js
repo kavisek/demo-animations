@@ -222,14 +222,12 @@ function RaceValue({ value }) {
 
 export function RaceDemo() {
   const [year, setYear] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  const [wantsPlay, setWantsPlay] = useState(true);
+  const atEnd = year >= raceYears.length - 1;
+  const playing = wantsPlay && !atEnd; // playback stops by itself at the last year
 
   useEffect(() => {
     if (!playing) return;
-    if (year >= raceYears.length - 1) {
-      setPlaying(false);
-      return;
-    }
     const t = setTimeout(() => setYear((y) => y + 1), 1300);
     return () => clearTimeout(t);
   }, [playing, year]);
@@ -246,13 +244,15 @@ export function RaceDemo() {
           <button
             type="button"
             onClick={() => {
-              if (year >= raceYears.length - 1) setYear(0);
-              setPlaying((p) => !p || year >= raceYears.length - 1);
+              if (atEnd) {
+                setYear(0);
+                setWantsPlay(true);
+              } else setWantsPlay(!playing);
             }}
             className="inline-flex items-center gap-1.5 rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700 active:scale-95"
           >
             <Icon name={playing ? "pause" : "play"} className="h-4 w-4" />
-            {playing ? "Pause" : year >= raceYears.length - 1 ? "Replay" : "Play"}
+            {playing ? "Pause" : atEnd ? "Replay" : "Play"}
           </button>
           <label className="flex items-center gap-2 text-xs text-gray-500">
             Year
@@ -262,7 +262,7 @@ export function RaceDemo() {
               max={raceYears.length - 1}
               value={year}
               onChange={(e) => {
-                setPlaying(false);
+                setWantsPlay(false);
                 setYear(+e.target.value);
               }}
               className="w-40 accent-blue-600"
@@ -515,13 +515,11 @@ export function DonutDemo() {
   const shown = useCountUp(hover === null ? total : items[hover][1], 600);
   const fmt = (v) => `${unit}${Math.round(v).toLocaleString()}`;
 
-  let start = 0;
-  const segs = items.map(([label, v], i) => {
-    const len = (v / total) * C;
-    const seg = { label, v, i, len, start };
-    start += len;
-    return seg;
-  });
+  // Each segment starts where the previous one ended
+  const segs = items.reduce((acc, [label, v], i) => {
+    const prev = acc[acc.length - 1];
+    return [...acc, { label, v, i, len: (v / total) * C, start: prev ? prev.start + prev.len : 0 }];
+  }, []);
 
   return (
     <ChartCard

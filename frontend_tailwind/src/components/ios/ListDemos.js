@@ -30,15 +30,13 @@ function SwipeRow({ mail, open, onOpen, onToggleRead, onDelete }) {
   const [removing, setRemoving] = useState(false);
   const drag = useRef(null);
 
-  // Another row opening closes this one
-  useEffect(() => {
-    if (!open && !dragging) setX(0);
-  }, [open, dragging]);
+  // When another row opens, this one is no longer `open`, so it shows at 0 and slides closed
+  const shownX = dragging || open || removing ? x : 0;
 
   function down(e) {
     if (removing) return;
     e.currentTarget.setPointerCapture(e.pointerId);
-    drag.current = { startX: e.clientX, base: x, moved: false };
+    drag.current = { startX: e.clientX, base: shownX, moved: false };
     setDragging(true);
   }
   function move(e) {
@@ -70,7 +68,7 @@ function SwipeRow({ mail, open, onOpen, onToggleRead, onDelete }) {
     setRemoving(true);
   }
 
-  const reveal = Math.min(1, Math.max(0, x / 70));
+  const reveal = Math.min(1, Math.max(0, shownX / 70));
 
   return (
     <div
@@ -79,7 +77,7 @@ function SwipeRow({ mail, open, onOpen, onToggleRead, onDelete }) {
     >
       <div className="relative overflow-hidden">
         {/* Left-swipe actions, under the row */}
-        <div className="absolute inset-y-0 right-0 flex" style={{ width: Math.max(ACTIONS_W, -x) }}>
+        <div className="absolute inset-y-0 right-0 flex" style={{ width: Math.max(ACTIONS_W, -shownX) }}>
           <span className="flex flex-1 flex-col items-center justify-center bg-gray-400 text-[11px] text-white">
             <Icon name="more" className="h-5 w-5" />More
           </span>
@@ -91,7 +89,7 @@ function SwipeRow({ mail, open, onOpen, onToggleRead, onDelete }) {
           </button>
         </div>
         {/* Right-swipe action */}
-        <div className="absolute inset-y-0 left-0 flex items-center bg-blue-500 pl-5 text-white" style={{ width: Math.max(0, x) }}>
+        <div className="absolute inset-y-0 left-0 flex items-center bg-blue-500 pl-5 text-white" style={{ width: Math.max(0, shownX) }}>
           <span className="flex flex-col items-center text-[11px] transition-transform duration-150" style={{ transform: `scale(${0.6 + reveal * 0.4})`, opacity: reveal }}>
             <Icon name="mail" className="h-5 w-5" />
             {mail.unread ? "Read" : "Unread"}
@@ -103,7 +101,7 @@ function SwipeRow({ mail, open, onOpen, onToggleRead, onDelete }) {
           onPointerMove={move}
           onPointerUp={up}
           onPointerCancel={up}
-          style={{ transform: `translateX(${x}px)` }}
+          style={{ transform: `translateX(${shownX}px)` }}
           className={`relative flex touch-pan-y select-none gap-2 bg-white py-2.5 pl-2 pr-4 ${dragging ? "" : "transition-transform duration-300 ease-ios"}`}
         >
           <span className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full transition-all duration-300 ${mail.unread ? "scale-100 bg-blue-500" : "scale-0 bg-transparent"}`} />

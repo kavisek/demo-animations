@@ -400,16 +400,21 @@ export function LoadingDemo() {
   const [run, setRun] = useState(0);
 
   useEffect(() => {
-    setLoading(true);
+    if (!loading) return;
     const t = setTimeout(() => setLoading(false), 1800);
     return () => clearTimeout(t);
-  }, [run]);
+  }, [loading, run]);
+
+  function reload() {
+    setLoading(true);
+    setRun((n) => n + 1); // restarts the timer even if a load is already in progress
+  }
 
   return (
     <Card
       title="Billing by service"
       subtitle={loading ? "Loading…" : `${instances.length} rows`}
-      actions={<Button icon="replay" onClick={() => setRun((n) => n + 1)}>Reload</Button>}
+      actions={<Button icon="replay" onClick={reload}>Reload</Button>}
     >
       <table className="w-full min-w-[600px]">
         <thead className="bg-gray-50">
