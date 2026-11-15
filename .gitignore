@@ -1,25 +1,98 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-frontend/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
+# --- macOS ---------------------------------------------------------------
+# Finder metadata, written into every folder you open
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.AppleDouble
+.LSOverride
 
+# Custom folder icons. The file is "Icon" plus a carriage return, so this line
+# ends in two literal CRs (git strips one). Editors may hide them; don't retype it.
+Icon
+
+
+# Resource forks copied to non-HFS volumes (SMB shares, USB drives)
+._*
+
+# Volume-level folders
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Files that may appear on AFP shares
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+# --- Editors -------------------------------------------------------------
+.idea/
+*.swp
+*.swo
+*~
+# --- React / Node --------------------------------------------------------
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Build output (Vite: dist/, Create React App: build/, Next.js: .next/ and out/)
+dist/
+dist-ssr/
+build/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Tool caches
+.vite/
+.turbo/
+.eslintcache
+.parcel-cache/
+
+# Tests
+coverage/
+playwright-report/
+test-results/
+
+# Environment and secrets (Vite and Next.js both load .env*.local)
+.env
+.env.*
+!.env.example
+
+# Deploy tooling
+.vercel/
+.netlify/
+
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-*.vscode
+# Do NOT ignore package-lock.json, pnpm-lock.yaml, or yarn.lock: lock files belong in git.
+
+# --- Project -------------------------------------------------------------
+# Private keys and certificates
+*.pem
+
+
+.claude
+.vscode
+
+# Local AI, editor, and dev container config
+.claude/
+.cursor/
+.vscode/
+.devcontainer/
+CLAUDE.md
+AGENTS.md
+.cursorrules
