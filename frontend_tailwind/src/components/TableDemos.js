@@ -465,16 +465,16 @@ const heat = days.map((_, d) =>
 function Sparkline({ points, delayMs }) {
   const max = Math.max(...points);
   const min = Math.min(...points);
-  const d = points.map((p, i) => `${(i / (points.length - 1)) * 100},${28 - ((p - min) / (max - min || 1)) * 24}`).join(" ");
+  // viewBox matches the rendered size (112 × 32) so the pathLength draw animation isn't distorted
+  const d = points.map((p, i) => `${2 + (i / (points.length - 1)) * 108},${28 - ((p - min) / (max - min || 1)) * 24}`).join(" ");
   const up = points.at(-1) >= points[0];
   return (
-    <svg viewBox="0 0 100 32" className="h-8 w-28" preserveAspectRatio="none" aria-hidden="true">
+    <svg viewBox="0 0 112 32" className="h-8 w-28" aria-hidden="true">
       <polyline
         points={d}
         pathLength="1"
         fill="none"
         strokeWidth="2"
-        vectorEffect="non-scaling-stroke"
         strokeLinecap="round"
         strokeLinejoin="round"
         style={delay(delayMs)}
