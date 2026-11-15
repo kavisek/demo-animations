@@ -2,9 +2,10 @@ IMAGE=demo-animations
 CONTAINER_NAME=demo-animations
 
 # LOCAL DEV (docker compose, hot reloading)
+# --renew-anon-volumes swaps in the image's fresh node_modules, so dependency changes take effect
 .PHONY: start
 start:
-	docker compose up -d --build
+	docker compose up -d --build --renew-anon-volumes
 	@echo "Frontend running at http://localhost:3000 (logs: docker compose logs -f frontend)"
 
 .PHONY: stop
