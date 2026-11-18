@@ -81,6 +81,8 @@ pnpm-debug.log*
 # Do NOT ignore package-lock.json, pnpm-lock.yaml, or yarn.lock: lock files belong in git.
 
 # --- Project -------------------------------------------------------------
+# Sample video downloaded by `make start` (see Makefile); never commit it
+frontend_tailwind/public/videos/
 # Private keys and certificates
 *.pem
 

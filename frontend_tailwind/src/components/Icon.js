@@ -64,14 +64,29 @@ const paths = {
   up: "m6 15 6-6 6 6",
   pause: "M8 5v14m8-14v14",
   play: "M7 4v16l13-8L7 4Z",
+  video: "M4 6h12v12H4zM16 10l5-3v10l-5-3",
+  volume: "M4 9h4l5-4v14l-5-4H4zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12",
+  mute: "M4 9h4l5-4v14l-5-4H4zM17 9l5 6m0-6-5 6",
+  fullscreen: "M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5",
+  cc: "M3 6h18v12H3zM10 10.5a2 2 0 1 0 0 3M17 10.5a2 2 0 1 0 0 3",
+  heart: "M12 20s-7.5-4.6-9.2-9.3C1.6 7.2 4 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4 20 4 22.4 7.2 21.2 10.7 19.5 15.4 12 20 12 20Z",
+  "thumb-up": "M7 21H4V10h3m0 11h9.6a2 2 0 0 0 2-1.6l1.3-7A2 2 0 0 0 18 10h-5V5.5A2.5 2.5 0 0 0 10.5 3L7 10v11Z",
+  "thumb-down": "M17 3h3v11h-3M17 3H7.4a2 2 0 0 0-2 1.6l-1.3 7A2 2 0 0 0 6 14h5v4.5a2.5 2.5 0 0 0 2.5 2.5L17 14V3Z",
+  share: "M14 5l7 7-7 7M21 12H9a6 6 0 0 0-6 6v1",
+  "skip-next": "M5 5v14l10-7L5 5Zm13 0v14",
+  "mini-player": "M3 5h18v14H3zM12 12h7v5h-7z",
+  "bell-off": "M6 16v-5a6 6 0 0 1 9.5-4.9M18 11v5l2 2H8m2 2h4M3 3l18 18",
+  bookmark: "M6 3h12v18l-6-4-6 4V3Z",
+  captions: "M3 6h18v12H3zM7 13h4m2 0h4",
   sparkle:"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Zm7 12 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z",
 };
 
-export default function Icon({ name, className = "h-5 w-5", style }) {
+// `filled` draws the shape solid (e.g. a liked heart) instead of as an outline
+export default function Icon({ name, className = "h-5 w-5", style, filled = false }) {
   return (
     <svg
       viewBox="0 0 24 24"
-      fill="none"
+      fill={filled ? "currentColor" : "none"}
       stroke="currentColor"
       strokeWidth={1.8}
       strokeLinecap="round"

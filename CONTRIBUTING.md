@@ -4,7 +4,7 @@ Thanks for your interest in contributing!
 
 ## Development setup
 
-You need [Docker](https://docs.docker.com/get-docker/) with Compose v2, or Node.js 22 if you'd rather run the app directly.
+You need [Docker](https://docs.docker.com/get-docker/) with Compose v2, or Node.js 20.9 or later if you'd rather run the app directly.
 
 ```sh
 git clone https://github.com/kavisek/demo-animations.git

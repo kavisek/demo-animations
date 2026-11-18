@@ -41,6 +41,13 @@
   --animate-banner-in: banner-in 550ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
   --animate-bubble-in: bubble-in 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
   --animate-hud-in: hud-in 300ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  /* Video */
+  --animate-flash-out: flash-out 650ms ease-out both;
+  --animate-ripple: ripple 700ms ease-out both;
+  --animate-heart-pop: heart-pop 900ms ease-out both;
+  --animate-burst: burst 650ms ease-out both;
+  --animate-float-up: float-up 2.6s ease-out both;
+  --animate-ring: ring 900ms ease-in-out;
 
   @keyframes fade-up {
     0% {
@@ -238,6 +245,101 @@
     100% {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+  /* Video: center play/pause flash */
+  @keyframes flash-out {
+    0% {
+      opacity: 0.9;
+      transform: scale(0.7);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.35);
+    }
+  }
+  /* Video: double-tap seek ripple */
+  @keyframes ripple {
+    0% {
+      opacity: 0.45;
+      transform: scale(0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2.4);
+    }
+  }
+  /* Video: double-tap like heart */
+  @keyframes heart-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0) rotate(-15deg);
+    }
+    15% {
+      opacity: 1;
+      transform: scale(1.25) rotate(-8deg);
+    }
+    30% {
+      transform: scale(0.95) rotate(-8deg);
+    }
+    45% {
+      transform: scale(1.05) rotate(-8deg);
+    }
+    75% {
+      opacity: 1;
+      transform: scale(1) rotate(-8deg) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.1) rotate(-8deg) translateY(-48px);
+    }
+  }
+  /* Video: like-button particles; each sets --dx and --dy */
+  @keyframes burst {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--dx), var(--dy)) scale(0.3);
+    }
+  }
+  /* Video: live-chat reactions float up; each sets --drift */
+  @keyframes float-up {
+    0% {
+      opacity: 0;
+      transform: translate(0, 0) scale(0.6);
+    }
+    12% {
+      opacity: 1;
+      transform: translate(0, -20px) scale(1.1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--drift), -240px) scale(0.9);
+    }
+  }
+  /* Video: notification bell ring */
+  @keyframes ring {
+    0%,
+    100% {
+      transform: rotate(0);
+    }
+    15% {
+      transform: rotate(16deg);
+    }
+    30% {
+      transform: rotate(-14deg);
+    }
+    45% {
+      transform: rotate(10deg);
+    }
+    60% {
+      transform: rotate(-6deg);
+    }
+    75% {
+      transform: rotate(3deg);
     }
   }
 }

@@ -40,6 +40,15 @@ const hoverPreview = {
   "chart-donut": "group-hover:animate-spin-slow",
   "chart-scatter": "group-hover:animate-float",
   "chart-kpi": "group-hover:animate-pulse",
+  "video-player": "group-hover:scale-125",
+  "video-chapters": "group-hover:animate-pulse",
+  "mini-player": "group-hover:translate-x-1 group-hover:translate-y-1",
+  "autoplay-next": "group-hover:translate-x-1",
+  "video-grid": "group-hover:scale-110",
+  "filter-chips": "group-hover:animate-bounce",
+  "vertical-feed": "group-hover:-translate-y-1",
+  "like-subscribe": "group-hover:-rotate-12",
+  "live-chat": "group-hover:animate-bounce",
 };
 
 // The banner's gradient differs per project so each one feels distinct
@@ -47,6 +56,7 @@ const banners = {
   web: "from-blue-600 via-indigo-600 to-violet-600",
   ios: "from-gray-900 via-slate-800 to-indigo-900",
   charts: "from-teal-600 via-sky-600 to-blue-700",
+  video: "from-rose-600 via-red-600 to-orange-500",
 };
 
 export default function ProjectOverview({ project }) {
